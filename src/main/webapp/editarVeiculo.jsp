@@ -2,7 +2,7 @@
 <%@include file="WEB-INF/cabecalho.jsp"%>
 
 <main>
-    <h2>Editar</h2>
+    <h2>Editar Veículo</h2>
     <form action="editarVeiculo" method="post">
         <label>
             <input type="hidden" name="numeroSerie" value="${param.numeroSerie}">

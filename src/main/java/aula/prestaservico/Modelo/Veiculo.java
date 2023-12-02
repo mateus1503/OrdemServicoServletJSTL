@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Veiculo {
     private int numeroSerie;
     private String nome, modelo, marca;
+    private Cliente cliente;
 
     public Veiculo() {}
     public Veiculo(int numeroSerie) {
@@ -54,18 +55,11 @@ public class Veiculo {
         this.marca = marca;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(numeroSerie);
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "numSerie=" + numeroSerie +
-                ", nome='" + nome + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", marca=" + marca +
-                '}';
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

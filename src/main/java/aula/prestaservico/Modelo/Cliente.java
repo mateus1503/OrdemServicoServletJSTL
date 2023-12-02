@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Cliente {
     private int id;
     private String nome, endereco, telefone;
+    List<Veiculo> veiculos;
 
     public Cliente(){}
     public Cliente(int id) {
@@ -54,5 +55,13 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
+    }
+
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
     }
 }

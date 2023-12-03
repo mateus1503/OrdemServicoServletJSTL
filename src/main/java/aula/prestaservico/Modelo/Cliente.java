@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Cliente {
     private int id;
     private String nome, endereco, telefone;
-    List<Veiculo> veiculos;
+    private List<Veiculo> veiculos;
 
     public Cliente(){}
     public Cliente(int id) {

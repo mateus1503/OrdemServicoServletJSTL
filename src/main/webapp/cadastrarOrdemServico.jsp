@@ -6,17 +6,17 @@
     <h2>Cadastrar Ordem de Serviço</h2>
     <form action="cadastrarOrdemServico" method="post">
         <label>ID:
-            <input type="text" name="id" value="id" placeholder="Id">
+            <input type="text" name="idcliente" value="${param.id}">
         </label>
-        <label>Nome:
-            <input type="text" name="nome" value="nome" placeholder="Nome">
+        <label>Cliente:
+            <input type="text" name="nomecliente" value="${param.nome}">
         </label>
         <label>Telefone:
-            <input type="text" name="telefone" value="telefone" placeholder="Telefone">
+            <input type="text" name="telefonecliente" value="${param.telefone}">
         </label>
         <br>
         <label>Endereco:
-            <input type="text" name="endereco" value="endereco" placeholder="Endereco">
+            <input type="text" name="enderecoCliente" value="${param.endereco}">
         </label>
     </form>
 </main>

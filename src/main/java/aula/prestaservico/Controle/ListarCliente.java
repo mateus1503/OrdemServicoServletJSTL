@@ -4,7 +4,6 @@ import aula.prestaservico.DAO.ErroDao;
 import aula.prestaservico.DAO.ClienteDaoInterface;
 import aula.prestaservico.DAO.ClienteDaoClasse;
 import aula.prestaservico.Modelo.Cliente;
-import aula.prestaservico.Modelo.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

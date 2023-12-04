@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class VeiculoDaoClasse implements VeiculoDaoInterface{
@@ -62,21 +64,21 @@ public class VeiculoDaoClasse implements VeiculoDaoInterface{
     }
 
     @Override
-    public Veiculo buscar(String modelo, String marca) throws ErroDao {
+    public List<Veiculo> buscarVeiculo(int id) throws ErroDao {
         try {
-            PreparedStatement stm=con.prepareStatement("select * from usuario where modelo=? and marca=?");
-            stm.setString(1,modelo);
-            stm.setString(2,marca);
+            PreparedStatement stm=con.prepareStatement("select * from veiculo where id_cliente=?");
+            stm.setInt(1, id);
             ResultSet rs=stm.executeQuery();
-            if (rs.next()){
+            List<Veiculo> veiculos=new ArrayList<>();
+            while (rs.next()){
                 Veiculo v=new Veiculo();
                 v.setNumeroSerie(rs.getInt("numeroSerie"));
                 v.setNome(rs.getString("nome"));
                 v.setModelo(rs.getString("modelo"));
                 v.setMarca(rs.getString("marca"));
-                return v;
+                veiculos.add(v);
             }
-            return null;
+            return veiculos;
         } catch (SQLException e) {
             throw new ErroDao(e);
         }

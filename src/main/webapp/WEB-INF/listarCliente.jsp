@@ -17,14 +17,11 @@
       <section class="cliente">
         <h1>ID: ${cliente.id}</h1>
         <h1>Nome: ${cliente.nome}</h1>
-        <h2>Veículos:</h2>
-        <ul>
-          <li>Nome: ${cliente.getVeiculos()}</li>
-        </ul>
         <p>
+          <a href="listarVeiculo.jsp?id=${cliente.id}">Listar Veículos</a>
           <a href="editarCliente.jsp?id=${cliente.id}&nome=${cliente.nome}&endereco=${cliente.endereco}&telefone=${cliente.telefone}">Editar Dados</a>
           <a href="deletarCliente?id=${cliente.id}">Deletar Cliente</a>
-          <a href="cadastrarOrdemServico.jsp?id=${cliente.id}&nome=${cliente.nome}&endereco=${cliente.endereco}&telefone=${cliente.telefone}">Realizar Ordem de Serviço</a>
+          <a href="processarOrdemServico.jsp?id=${cliente.id}">Realizar Ordem de Serviço</a>
         </p>
       </section>
     </c:forEach>

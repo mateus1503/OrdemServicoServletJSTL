@@ -28,11 +28,12 @@ public class EditarCliente extends HttpServlet {
         String nome=request.getParameter("nome");
         String endereco=request.getParameter("endereco");
         String telefone=request.getParameter("telefone");
+        String cpf=request.getParameter("cpf");
         int id = Integer.parseInt(clienteId);
 
-        if(Validador.temConteudo(clienteId)&&Validador.temConteudo(nome)
-                &&Validador.temConteudo(endereco)&&Validador.temConteudo(telefone)) {
-            Cliente c = new Cliente(id,nome,endereco,telefone);
+        if(Validador.temConteudo(clienteId)&&Validador.temConteudo(nome)&&Validador.temConteudo(endereco)
+                &&Validador.temConteudo(telefone)&&Validador.temConteudo(cpf)) {
+            Cliente c = new Cliente(id,nome,endereco,telefone,cpf);
             try (ClienteDaoInterface dao = new ClienteDaoClasse()) {
                 dao.editar(c);
                 response.sendRedirect("listarCliente.jsp?mensagem=editadocomsucesso");

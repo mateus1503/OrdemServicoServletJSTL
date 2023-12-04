@@ -1,66 +1,34 @@
 package aula.prestaservico.DAO;
 
 import aula.prestaservico.Modelo.Cliente;
+import aula.prestaservico.Modelo.OrdemServico;
+import aula.prestaservico.Modelo.Servico;
 import aula.prestaservico.Modelo.Veiculo;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ClienteDaoClasse implements ClienteDaoInterface{
+public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
     private Connection con;
-    public ClienteDaoClasse() throws ErroDao{
+    public OrdemServicoDaoClasse() throws ErroDao{
         con=FabricaConexao.pegaConexao();
     }
     @Override
-    public void inserir(Cliente c) throws ErroDao {
-        try {
-            PreparedStatement stm=con.prepareStatement
-                    ("insert into cliente (nome,endereco,telefone,cpf) values(?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-            stm.setString(1,c.getNome());
-            stm.setString(2,c.getEndereco());
-            stm.setString(3,c.getTelefone());
-            stm.setString(4,c.getCpf());
-            stm.executeUpdate();
-
-            ResultSet rs=stm.getGeneratedKeys();
-            if(rs.next()){
-                c.setId(rs.getInt(1));
-            }
-        } catch (SQLException e) {
-            throw new ErroDao(e);
-        }
+    public void inserir(OrdemServico o) throws ErroDao {
     }
 
     @Override
-    public void deletar(Cliente c) throws ErroDao {
-        try {
-            PreparedStatement stm = con.prepareStatement
-                    ("delete from cliente where id = ?");
-            stm.setInt(1, c.getId());
-            stm.executeUpdate();
-        } catch (SQLException e) {
-            throw new ErroDao(e);
-        }
+    public void deletar(OrdemServico o) throws ErroDao {
     }
 
     @Override
-    public void editar(Cliente c) throws ErroDao {
-        try {
-            PreparedStatement stm = con.prepareStatement
-                    ("update cliente set nome=?, endereco=?, telefone=?, cpf=? where id=?");
-            stm.setString(1, c.getNome());
-            stm.setString(2, c.getEndereco());
-            stm.setString(3, c.getTelefone());
-            stm.setString(4, c.getCpf());
-            stm.setInt(4, c.getId());
-            stm.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new ErroDao(e);
-        }
+    public void editar(OrdemServico o) throws ErroDao {
     }
 
     @Override
@@ -120,6 +88,26 @@ public class ClienteDaoClasse implements ClienteDaoInterface{
                 veiculos.add(v);
             }
             return veiculos;
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+    }
+
+    @Override
+    public List<Servico> buscarServico() throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement("select * from servico");
+            ResultSet rs=stm.executeQuery();
+            List<Servico> servicos=new ArrayList<>();
+            while (rs.next()){
+                Servico s=new Servico();
+                s.setId(rs.getInt("id"));
+                s.setNome(rs.getString("nome"));
+                s.setDescricao(rs.getString("descricao"));
+                s.setValor(rs.getDouble("valor"));
+                servicos.add(s);
+            }
+            return servicos;
         } catch (SQLException e) {
             throw new ErroDao(e);
         }

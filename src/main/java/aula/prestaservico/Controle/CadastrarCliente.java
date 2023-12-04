@@ -24,9 +24,11 @@ public class CadastrarCliente extends HttpServlet {
         String nome=request.getParameter("nome");
         String endereco=request.getParameter("endereco");
         String telefone=request.getParameter("telefone");
+        String cpf=request.getParameter("cpf");
 
-        if(Validador.temConteudo(nome)&&Validador.temConteudo(endereco)&&Validador.temConteudo(telefone)) {
-            Cliente c = new Cliente(nome,endereco,telefone);
+        if(Validador.temConteudo(nome)&&Validador.temConteudo(endereco)
+                &&Validador.temConteudo(telefone)&&Validador.temConteudo(cpf)) {
+            Cliente c = new Cliente(nome,endereco,telefone,cpf);
             try (ClienteDaoInterface dao = new ClienteDaoClasse()) {
                 dao.inserir(c);
                 response.sendRedirect("listarCliente.jsp?mensagem=cadastradocomsucesso");

@@ -6,23 +6,25 @@ import java.util.Objects;
 
 public class Cliente {
     private int id;
-    private String nome, endereco, telefone;
+    private String nome, endereco, telefone, cpf;
     private List<Veiculo> veiculos;
 
     public Cliente(){}
     public Cliente(int id) {
         this.id = id;
     }
-    public Cliente(String nome, String endereco, String telefone) {
+    public Cliente(String nome, String endereco, String telefone, String cpf) {
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.cpf = cpf;
     }
-    public Cliente(int id, String nome, String endereco, String telefone) {
+    public Cliente(int id, String nome, String endereco, String telefone, String cpf) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.cpf = cpf;
     }
 
     public int getId() {
@@ -55,6 +57,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public List<Veiculo> getVeiculos() {

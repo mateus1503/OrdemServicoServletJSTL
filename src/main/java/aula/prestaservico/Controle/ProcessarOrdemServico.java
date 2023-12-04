@@ -1,35 +1,41 @@
 package aula.prestaservico.Controle;
 
-import aula.prestaservico.DAO.ErroDao;
-import aula.prestaservico.DAO.VeiculoDaoClasse;
-import aula.prestaservico.DAO.VeiculoDaoInterface;
+import aula.prestaservico.DAO.*;
+import aula.prestaservico.Modelo.Cliente;
+import aula.prestaservico.Modelo.Servico;
 import aula.prestaservico.Modelo.Veiculo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-@WebServlet("/listarVeiculo.jsp")
-public class ListarVeiculo extends HttpServlet {
+@WebServlet("/processarOrdemServico.jsp")
+public class ProcessarOrdemServico extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try(VeiculoDaoInterface dao=new VeiculoDaoClasse())
+        HttpSession session = request.getSession();
+        try(OrdemServicoDaoInterface dao=new OrdemServicoDaoClasse())
         {
             String id=request.getParameter("id");
             int clienteid = Integer.parseInt(id);
 
+            Cliente cliente= dao.buscarCliente(clienteid);
             List<Veiculo> veiculos= dao.buscarVeiculo(clienteid);
+            List<Servico> servicos= dao.buscarServico();
+            request.setAttribute("cliente",cliente);
             request.setAttribute("veiculos",veiculos);
-            request.getRequestDispatcher("/WEB-INF/listarVeiculo.jsp").forward(request,response);
+            request.setAttribute("servicos",servicos);
+
+            request.getRequestDispatcher("cadastrarOrdemServico.jsp").forward(request,response);
         }catch (ErroDao e)
         {
-            response.sendRedirect("index.jsp?mensagem=erroaotentarlistar");
-
+            response.sendRedirect("listarCliente.jsp?mensagem=erroaotentarlistar");
         }
     }
 }

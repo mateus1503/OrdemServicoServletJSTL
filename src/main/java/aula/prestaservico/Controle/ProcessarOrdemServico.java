@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 @WebServlet("/processarOrdemServico.jsp")
 public class ProcessarOrdemServico extends HttpServlet {

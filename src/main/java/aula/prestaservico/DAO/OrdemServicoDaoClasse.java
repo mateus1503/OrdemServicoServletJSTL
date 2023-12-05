@@ -32,20 +32,17 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
     }
 
     @Override
-    public Set<Cliente> buscar() throws ErroDao {
+    public List<OrdemServico> buscar() throws ErroDao {
         try {
-            Set<Cliente> clientes=new HashSet<>();
-            PreparedStatement stm=con.prepareStatement("select * from cliente");
+            PreparedStatement stm=con.prepareStatement("select * from ordemServico");
             ResultSet rs=stm.executeQuery();
+            List<OrdemServico> ordemServicos=new ArrayList<>();
             while (rs.next()){
-                Cliente c=new Cliente();
-                c.setId(rs.getInt("id"));
-                c.setNome(rs.getString("nome"));
-                c.setEndereco(rs.getString("endereco"));
-                c.setTelefone(rs.getString("telefone"));
-                clientes.add(c);
+                OrdemServico s=new OrdemServico();
+                s.setId(rs.getInt("id"));
+                ordemServicos.add(s);
             }
-            return clientes;
+            return ordemServicos;
         } catch (SQLException e) {
             throw new ErroDao(e);
         }

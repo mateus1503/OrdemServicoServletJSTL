@@ -44,7 +44,7 @@ public class CadastrarServico extends HttpServlet {
                 response.sendRedirect("cadastrarServico.jsp?mensagem=faltaparametros");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

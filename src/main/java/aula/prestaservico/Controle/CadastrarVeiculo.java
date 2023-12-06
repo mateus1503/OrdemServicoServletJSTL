@@ -40,7 +40,7 @@ public class CadastrarVeiculo extends HttpServlet {
                 response.sendRedirect("cadastrarVeiculo.jsp?mensagem=faltaparametros");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

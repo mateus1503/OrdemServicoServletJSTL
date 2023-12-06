@@ -43,7 +43,7 @@ public class DeletarUsuario extends HttpServlet {
                 response.sendRedirect("index.jsp?mensagem=faltaparametros");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

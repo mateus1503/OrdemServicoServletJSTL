@@ -41,7 +41,7 @@ public class ListarOrdemServico extends HttpServlet {
 
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 

@@ -42,7 +42,7 @@ public class CadastrarUsuario extends HttpServlet {
                 response.sendRedirect("cadastrarUsuario?mensagem=faltaparametros");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

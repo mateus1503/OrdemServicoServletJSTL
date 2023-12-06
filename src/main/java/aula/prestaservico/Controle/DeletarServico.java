@@ -44,7 +44,7 @@ public class DeletarServico extends HttpServlet {
                 response.sendRedirect("listarServico.jsp?mensagem=faltaparametros");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

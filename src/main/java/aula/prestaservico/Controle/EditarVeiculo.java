@@ -49,7 +49,7 @@ public class EditarVeiculo extends HttpServlet {
                 response.sendRedirect("listarVeiculo.jsp?mensagem=faltaparametros");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

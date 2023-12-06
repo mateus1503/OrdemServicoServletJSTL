@@ -62,20 +62,19 @@ public class ServicoDaoClasse implements ServicoDaoInterface{
     }
 
     @Override
-    public Servico buscar(String nome, String descricao) throws ErroDao {
+    public Servico buscar(int id) throws ErroDao {
         try {
             PreparedStatement stm=con.prepareStatement
-                    ("select * from usuario where nome=? and descricao=?");
-            stm.setString(1,nome);
-            stm.setString(2,descricao);
+                    ("select * from servico where id=? ");
+            stm.setInt(1,id);
             ResultSet rs=stm.executeQuery();
             if (rs.next()){
-                Servico v=new Servico();
-                v.setId(rs.getInt("id"));
-                v.setNome(rs.getString("nome"));
-                v.setDescricao(rs.getString("descricao"));
-                v.setValor(rs.getDouble("valor"));
-                return v;
+                Servico s=new Servico();
+                s.setId(rs.getInt("id"));
+                s.setNome(rs.getString("nome"));
+                s.setDescricao(rs.getString("descricao"));
+                s.setValor(rs.getDouble("valor"));
+                return s;
             }
             return null;
         } catch (SQLException e) {

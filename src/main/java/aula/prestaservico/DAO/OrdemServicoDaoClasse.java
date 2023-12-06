@@ -21,6 +21,23 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
     }
     @Override
     public void inserir(OrdemServico o) throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement
+                    ("insert into ordemservico (idCliente,numeroserieVeiculo,observacao,dataEntrada,dataSaida) values (?,?,?,?,?);",PreparedStatement.RETURN_GENERATED_KEYS);
+            stm.setInt(1,o.getIdCliente());
+            stm.setInt(1,o.getNumeroserieVeiculo());
+            stm.setString(1,o.getObservacao());
+            stm.setString(1,o.getDataEntrada());
+            stm.setString(1,o.getDataSaida());
+            stm.executeUpdate();
+
+            ResultSet rs=stm.getGeneratedKeys();
+            if(rs.next()){
+                o.setId(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     @Override
@@ -29,6 +46,29 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
 
     @Override
     public void editar(OrdemServico o) throws ErroDao {
+    }
+
+    @Override
+    public List<OrdemServico> buscar(int id) throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement("select * from ordemservico where idCliente=?");
+            stm.setInt(1, id);
+            ResultSet rs=stm.executeQuery();
+            List<OrdemServico> ordemServicos=new ArrayList<>();
+            while (rs.next()){
+                OrdemServico o=new OrdemServico();
+                o.setId(rs.getInt("id"));
+                o.setIdCliente(rs.getInt("idCliente"));
+                o.setNumeroserieVeiculo(rs.getInt("numeroserieVeiculo"));
+                o.setObservacao(rs.getString("observacao"));
+                o.setDataEntrada(rs.getString("dataEntrada"));
+                o.setDataSaida(rs.getString("dataSaida"));
+                ordemServicos.add(o);
+            }
+            return ordemServicos;
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     @Override

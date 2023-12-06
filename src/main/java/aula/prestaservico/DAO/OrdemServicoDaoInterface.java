@@ -12,6 +12,7 @@ public interface OrdemServicoDaoInterface extends AutoCloseable{
     public void inserir(OrdemServico o) throws ErroDao;
     public  void deletar(OrdemServico o) throws ErroDao;
     public void editar(OrdemServico o) throws ErroDao;
+    public List<OrdemServico> buscar(int id)throws ErroDao;
     public List<OrdemServico> buscar()throws ErroDao;
     public List<Veiculo> buscarVeiculo(int id)throws ErroDao;
     public List<Servico> buscarServico()throws ErroDao;

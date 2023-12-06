@@ -9,15 +9,15 @@ public class OrdemServico {
     private String nomeCliente,cpfCliente,enderecoCliente,telefoneCliente;
     private int numeroserieVeiculo;
     private String observacao;
-    private List<Servico> idServicos;
+    private List<Servico> servicos;
     private String dataEntrada;
-    private Date dataSaida;
+    private String dataSaida;
     private double valorTotal;
 
     public OrdemServico() {}
 
     public OrdemServico(int idCliente, String nomeCliente, String cpfCliente, String enderecoCliente, String telefoneCliente
-            , int numeroserieVeiculo, String observacao, List<Servico> idServicos, String dataEntrada, Date dataSaida, double valorTotal) {
+            , int numeroserieVeiculo, String observacao, String dataEntrada, String dataSaida) {
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpfCliente;
@@ -25,14 +25,13 @@ public class OrdemServico {
         this.telefoneCliente = telefoneCliente;
         this.numeroserieVeiculo = numeroserieVeiculo;
         this.observacao = observacao;
-        this.idServicos = idServicos;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.valorTotal = valorTotal;
     }
 
     public OrdemServico(int id, int idCliente, String nomeCliente, String cpfCliente, String enderecoCliente, String telefoneCliente
-            , int numeroserieVeiculo, String observacao, List<Servico> idServicos, String dataEntrada, Date dataSaida, double valorTotal) {
+            , int numeroserieVeiculo, String observacao, List<Servico> servicos, String dataEntrada, String dataSaida, double valorTotal) {
         this.id = id;
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
@@ -41,7 +40,7 @@ public class OrdemServico {
         this.telefoneCliente = telefoneCliente;
         this.numeroserieVeiculo = numeroserieVeiculo;
         this.observacao = observacao;
-        this.idServicos = idServicos;
+        this.servicos = servicos;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.valorTotal = valorTotal;
@@ -111,12 +110,12 @@ public class OrdemServico {
         this.observacao = observacao;
     }
 
-    public List<Servico> getIdServicos() {
-        return idServicos;
+    public List<Servico> getservicos() {
+        return servicos;
     }
 
-    public void setIdServicos(List<Servico> idServicos) {
-        this.idServicos = idServicos;
+    public void setservicos(List<Servico> servicos) {
+        this.servicos = servicos;
     }
 
     public String getDataEntrada() {
@@ -127,11 +126,11 @@ public class OrdemServico {
         this.dataEntrada = dataEntrada;
     }
 
-    public Date getDataSaida() {
+    public String getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(Date dataSaida) {
+    public void setDataSaida(String dataSaida) {
         this.dataSaida = dataSaida;
     }
 

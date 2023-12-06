@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Ordem de Serviço</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>

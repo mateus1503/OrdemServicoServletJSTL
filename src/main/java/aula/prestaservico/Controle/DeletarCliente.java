@@ -33,11 +33,9 @@ public class DeletarCliente extends HttpServlet {
                 dao.deletar(c);
                 response.sendRedirect("listarCliente.jsp?mensagem=deletadocomsucesso");
             } catch (ErroDao e) {
-                //throw new RuntimeException(e);
                 response.sendRedirect("listarCliente.jsp?mensagem=comordemservico");
             }
-        }
-        else//erro falta parâmetros
+        } else//erro falta parâmetros
         {
             response.sendRedirect("listarCliente.jsp?mensagem=faltaparametros");
         }

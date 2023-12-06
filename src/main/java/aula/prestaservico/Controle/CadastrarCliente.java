@@ -20,31 +20,31 @@ import java.io.IOException;
 public class CadastrarCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext aplicacao=getServletContext();
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
-        Usuario usuario = (Usuario) session.getAttribute("medico");
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        String nome=request.getParameter("nome");
-        String endereco=request.getParameter("endereco");
-        String telefone=request.getParameter("telefone");
-        String cpf=request.getParameter("cpf");
+        if (usuario != null) {
+            String nome=request.getParameter("nome");
+            String endereco=request.getParameter("endereco");
+            String telefone=request.getParameter("telefone");
+            String cpf=request.getParameter("cpf");
 
-        if(Validador.temConteudo(nome)&&Validador.temConteudo(endereco)
-                &&Validador.temConteudo(telefone)&&Validador.temConteudo(cpf)) {
-            Cliente c = new Cliente(nome,endereco,telefone,cpf);
-            try (ClienteDaoInterface dao = new ClienteDaoClasse()) {
-                dao.inserir(c);
-                response.sendRedirect("listarCliente.jsp?mensagem=cadastradocomsucesso");
-            } catch (ErroDao e) {
-                //throw new RuntimeException(e);
-                response.sendRedirect("cadastrarCliente.jsp?mensagem=falhaaotentarcadastrar");
+            if(Validador.temConteudo(nome)&&Validador.temConteudo(endereco)
+                    &&Validador.temConteudo(telefone)&&Validador.temConteudo(cpf)) {
+                Cliente c = new Cliente(nome,endereco,telefone,cpf);
+                try (ClienteDaoInterface dao = new ClienteDaoClasse()) {
+                    dao.inserir(c);
+                    response.sendRedirect("listarCliente.jsp?mensagem=cadastradocomsucesso");
+                } catch (ErroDao e) {
+                    response.sendRedirect("cadastrarCliente.jsp?mensagem=falhaaotentarcadastrar");
+                }
+            } else//erro falta parâmetros
+            {
+                response.sendRedirect("cadastrarCliente.jsp?mensagem=faltaparametros");
             }
+        } else {
+            response.sendRedirect("index.jsp?mensagem=Acesso Negado!");
         }
-        else//erro falta parâmetros
-        {
-            response.sendRedirect("cadastrarCliente.jsp?mensagem=faltaparametros");
-        }
-        //System.out.println(aplicacao.getAttribute("usuarios"));
     }
 }

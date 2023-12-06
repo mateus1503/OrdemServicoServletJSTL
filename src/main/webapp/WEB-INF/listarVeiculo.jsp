@@ -4,14 +4,8 @@
 <%@include file="cabecalho.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main>
+  <link rel="stylesheet" href="Stylesheet\styleListarVeiculo.css">
   <table>
-    <h4>Pesquisar Serviço</h4>
-    <form method="GET" action="pesquisaServico">
-      <input type="text" name="nomeServico" placeholder="Digite o nome do serviço">
-      <button type="submit">Pesquisar</button>
-      <a href="pesquisaServico" class="btn-limpar">Limpar</a>
-    </form>
-
     <h2>Clientes</h2>
     <c:forEach var="veiculo" items="${veiculos}">
       <section class="servico">

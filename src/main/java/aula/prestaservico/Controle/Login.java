@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
                     Set<Usuario> usuarios= dao.buscar();
                     sessao.setAttribute("usuarios", usuarios);
                     ClienteDaoInterface daoCliente=new ClienteDaoClasse();
-                    Set<Cliente> clientes = daoCliente.buscar();
+                    List<Cliente> clientes = daoCliente.buscar();
                     sessao.setAttribute("clientes", clientes);
                     dao.close();
                     daoCliente.close();

@@ -16,6 +16,9 @@
         <label>Telefone
             <input type="text" name="telefone" value="${param.telefone}" placeholder="Telefone">
         </label>
+        <label>CPF
+            <input type="text" name="cpf" value="${param.cpf}" placeholder="CPF">
+        </label>
         <input type="submit" value="Editar">
     </form>
 </main>

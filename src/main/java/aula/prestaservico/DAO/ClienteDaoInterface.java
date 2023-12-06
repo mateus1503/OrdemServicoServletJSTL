@@ -10,7 +10,7 @@ public interface ClienteDaoInterface extends AutoCloseable{
     public void inserir(Cliente c) throws ErroDao;
     public  void deletar(Cliente c) throws ErroDao;
     public void editar(Cliente c) throws ErroDao;
-    public Set<Cliente> buscar()throws ErroDao;
+    public List<Cliente> buscar()throws ErroDao;
     public List<Veiculo> buscarVeiculo(int id)throws ErroDao;
     public Cliente buscarCliente(int id)throws ErroDao;
     @Override

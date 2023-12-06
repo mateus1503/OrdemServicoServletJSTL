@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 @WebServlet("/listarCliente.jsp")
@@ -19,7 +20,7 @@ public class ListarCliente extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try(ClienteDaoInterface dao=new ClienteDaoClasse())
         {
-            Set<Cliente> clientes= dao.buscar();
+            List<Cliente> clientes= dao.buscar();
             request.setAttribute("clientes",clientes);
             request.getRequestDispatcher("/WEB-INF/listarCliente.jsp").forward(request,response);
         }catch (ErroDao e)

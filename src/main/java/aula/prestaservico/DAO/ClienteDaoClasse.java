@@ -55,7 +55,7 @@ public class ClienteDaoClasse implements ClienteDaoInterface{
             stm.setString(2, c.getEndereco());
             stm.setString(3, c.getTelefone());
             stm.setString(4, c.getCpf());
-            stm.setInt(4, c.getId());
+            stm.setInt(5, c.getId());
             stm.executeUpdate();
 
         } catch (SQLException e) {
@@ -64,9 +64,9 @@ public class ClienteDaoClasse implements ClienteDaoInterface{
     }
 
     @Override
-    public Set<Cliente> buscar() throws ErroDao {
+    public List<Cliente> buscar() throws ErroDao {
         try {
-            Set<Cliente> clientes=new HashSet<>();
+            List<Cliente> clientes=new ArrayList<>();
             PreparedStatement stm=con.prepareStatement("select * from cliente");
             ResultSet rs=stm.executeQuery();
             while (rs.next()){
@@ -75,6 +75,7 @@ public class ClienteDaoClasse implements ClienteDaoInterface{
                 c.setNome(rs.getString("nome"));
                 c.setEndereco(rs.getString("endereco"));
                 c.setTelefone(rs.getString("telefone"));
+                c.setCpf(rs.getString("cpf"));
                 clientes.add(c);
             }
             return clientes;

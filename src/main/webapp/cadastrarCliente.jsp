@@ -13,6 +13,9 @@
         <label>Telefone
             <input type="text" name="telefone" placeholder="Telefone">
         </label>
+        <label>CPF
+            <input type="text" name="cpf" placeholder="CPF">
+        </label>
         <input type="submit" value="Cadastrar">
     </form>
 </main>

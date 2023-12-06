@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Ordem de Serviço</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="Stylesheet\estilo.css">
 </head>
 <body>
     <header>

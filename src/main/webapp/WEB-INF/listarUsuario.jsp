@@ -4,6 +4,7 @@
 <%@include file="cabecalho.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main>
+  <link rel="stylesheet" href="Stylesheet\styleListarUsuario.css">
   <table>
     <h2>Usuários</h2>
     <c:forEach var="usuario" items="${usuarios}">

@@ -48,6 +48,20 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
     public void editar(OrdemServico o) throws ErroDao {
     }
 
+    public void atualizarValor(OrdemServico ordemServico) throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement
+                ("update ordemServico set valorTotal = ? where id = ?");
+
+            stm.setDouble(1,ordemServico.getValorTotal());
+            stm.setInt(2,ordemServico.getId());
+
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+    }
+
     @Override
     public List<OrdemServico> buscar(int id) throws ErroDao {
         try {
@@ -63,6 +77,7 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
                 o.setObservacao(rs.getString("observacao"));
                 o.setDataEntrada(rs.getString("dataEntrada"));
                 o.setDataSaida(rs.getString("dataSaida"));
+                o.setValorTotal(rs.getDouble("valorTotal"));
                 ordemServicos.add(o);
             }
             return ordemServicos;

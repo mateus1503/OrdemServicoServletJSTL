@@ -27,14 +27,18 @@ public class ProcessarOrdemServico extends HttpServlet {
             Cliente cliente= dao.buscarCliente(clienteid);
             List<Veiculo> veiculos= dao.buscarVeiculo(clienteid);
             List<Servico> servicos= dao.buscarServico();
-            request.setAttribute("cliente",cliente);
-            request.setAttribute("veiculos",veiculos);
-            request.setAttribute("servicos",servicos);
+            insertOrdemServico(request, cliente, veiculos, servicos);
 
             request.getRequestDispatcher("cadastrarOrdemServico.jsp").forward(request,response);
         }catch (ErroDao e)
         {
             response.sendRedirect("listarCliente.jsp?mensagem=erroaotentarlistar");
         }
+    }
+
+    private static void insertOrdemServico(HttpServletRequest request, Cliente cliente, List<Veiculo> veiculos, List<Servico> servicos) {
+        request.setAttribute("cliente", cliente);
+        request.setAttribute("veiculos", veiculos);
+        request.setAttribute("servicos", servicos);
     }
 }

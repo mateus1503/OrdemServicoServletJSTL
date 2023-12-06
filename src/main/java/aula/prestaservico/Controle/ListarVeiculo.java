@@ -23,7 +23,7 @@ public class ListarVeiculo extends HttpServlet {
             String id=request.getParameter("id");
             int clienteid = Integer.parseInt(id);
 
-            List<Veiculo> veiculos= dao.buscarVeiculo(clienteid);
+            List<Veiculo> veiculos= dao.buscarVeiculos(clienteid);
             request.setAttribute("veiculos",veiculos);
             request.getRequestDispatcher("/WEB-INF/listarVeiculo.jsp").forward(request,response);
         }catch (ErroDao e)

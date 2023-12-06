@@ -48,6 +48,26 @@ public class VeiculoDaoClasse implements VeiculoDaoInterface{
     }
 
     @Override
+    public Veiculo buscarVeiculo(int id) throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement("select * from veiculo where id_cliente=?");
+            stm.setInt(1, id);
+            ResultSet rs=stm.executeQuery();
+            if (rs.next()){
+                Veiculo veiculo=new Veiculo();
+                veiculo.setNumeroSerie(rs.getInt("numeroSerie"));
+                veiculo.setNome(rs.getString("nome"));
+                veiculo.setModelo(rs.getString("modelo"));
+                veiculo.setMarca(rs.getString("marca"));
+                return veiculo;
+            }
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+        return null;
+    }
+
+    @Override
     public void editar(Veiculo v) throws ErroDao {
         try {
             PreparedStatement stm = con.prepareStatement
@@ -64,7 +84,7 @@ public class VeiculoDaoClasse implements VeiculoDaoInterface{
     }
 
     @Override
-    public List<Veiculo> buscarVeiculo(int id) throws ErroDao {
+    public List<Veiculo> buscarVeiculos(int id) throws ErroDao {
         try {
             PreparedStatement stm=con.prepareStatement("select * from veiculo where id_cliente=?");
             stm.setInt(1, id);

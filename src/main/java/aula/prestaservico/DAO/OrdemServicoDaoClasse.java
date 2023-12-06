@@ -25,10 +25,10 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
             PreparedStatement stm=con.prepareStatement
                     ("insert into ordemservico (idCliente,numeroserieVeiculo,observacao,dataEntrada,dataSaida) values (?,?,?,?,?);",PreparedStatement.RETURN_GENERATED_KEYS);
             stm.setInt(1,o.getIdCliente());
-            stm.setInt(1,o.getNumeroserieVeiculo());
-            stm.setString(1,o.getObservacao());
-            stm.setString(1,o.getDataEntrada());
-            stm.setString(1,o.getDataSaida());
+            stm.setInt(2,o.getNumeroserieVeiculo());
+            stm.setString(3,o.getObservacao());
+            stm.setString(4,o.getDataEntrada());
+            stm.setString(5,o.getDataSaida());
             stm.executeUpdate();
 
             ResultSet rs=stm.getGeneratedKeys();

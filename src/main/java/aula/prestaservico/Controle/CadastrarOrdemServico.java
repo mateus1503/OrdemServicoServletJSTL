@@ -47,7 +47,7 @@ public class CadastrarOrdemServico extends HttpServlet {
                         telefoneCliente,numeroserieVeiculo,observacao,dataEntrada,dataSaida);
                 ordemServicoDao.inserir(ordemServico);
 
-                String[] idsServicosSelecionados = request.getParameterValues("idservico");
+                String[] idsServicosSelecionados = request.getParameterValues("idServico");
                 if (idsServicosSelecionados != null) {
                     for (String idServico : idsServicosSelecionados) {
                         Servico servico = servicoDao.buscar(Integer.parseInt(idServico));
@@ -58,6 +58,7 @@ public class CadastrarOrdemServico extends HttpServlet {
                         osHasServico.setId_ordemservico(ordemServico.getId());
                         osHasServico.setId_servico(idServicoInserido);
                         osHasServicoDao.inserir(osHasServico);
+                        System.out.print("Sim, entrou");
                     }
                 }
                 response.sendRedirect("listarCliente.jsp?mensagem=cadastradocomsucesso");

@@ -4,6 +4,7 @@ import aula.prestaservico.DAO.ClienteDaoClasse;
 import aula.prestaservico.DAO.ErroDao;
 import aula.prestaservico.DAO.ClienteDaoInterface;
 import aula.prestaservico.Modelo.Cliente;
+import aula.prestaservico.Modelo.Usuario;
 import aula.prestaservico.Util.Validador;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -20,6 +22,8 @@ public class CadastrarCliente extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext aplicacao=getServletContext();
         request.setCharacterEncoding("utf-8");
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("medico");
 
         String nome=request.getParameter("nome");
         String endereco=request.getParameter("endereco");

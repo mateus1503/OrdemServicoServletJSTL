@@ -2,6 +2,7 @@
 <%@include file="WEB-INF/cabecalho.jsp"%>
 
 <main>
+    <link rel="stylesheet" href="Stylesheet\styleCadastrar.css">
     <h2>Cadastrar Cliente</h2>
     <form action="cadastrarCliente" method="post">
         <label>Nome

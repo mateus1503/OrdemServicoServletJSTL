@@ -34,12 +34,12 @@ public class DeletarServico extends HttpServlet {
                 response.sendRedirect("listarServico.jsp?mensagem=deletadocomsucesso");
             } catch (ErroDao e) {
                 //throw new RuntimeException(e);
-                response.sendRedirect("index.jsp?mensagem=falhaaotentareditar");
+                response.sendRedirect("listarServico.jsp?mensagem=comordemservico");
             }
         }
         else//erro falta parâmetros
         {
-            response.sendRedirect("index.jsp?mensagem=faltaparametros");
+            response.sendRedirect("listarServico.jsp?mensagem=faltaparametros");
         }
         //System.out.println(aplicacao.getAttribute("usuarios"));
     }

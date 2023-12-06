@@ -31,13 +31,7 @@ public class Login extends HttpServlet {
                 Usuario u=dao.buscar(login,senha);
                 if(u!=null) {
                     HttpSession sessao = request.getSession();
-                    Set<Usuario> usuarios= dao.buscar();
-                    sessao.setAttribute("usuarios", usuarios);
-                    ClienteDaoInterface daoCliente=new ClienteDaoClasse();
-                    List<Cliente> clientes = daoCliente.buscar();
-                    sessao.setAttribute("clientes", clientes);
-                    dao.close();
-                    daoCliente.close();
+                    sessao.setAttribute("usuario", u);
                     response.sendRedirect("listarCliente.jsp?mensagem=logadocomsucesso");
                 }else
                     response.sendRedirect("index.jsp?mensagem=loginousenhaincorretos");

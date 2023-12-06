@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <main>
+    <link rel="stylesheet" href="Stylesheet\styleCadastrarOS.css">
     <h2>Cadastrar Ordem de Serviço</h2>
         <form action="cadastrarOrdemServico" method="get">
             <h3>Dados do Cliente:</h3>

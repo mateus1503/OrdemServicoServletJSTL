@@ -31,15 +31,15 @@ public class CadastrarServico extends HttpServlet {
             Servico s = new Servico(nome, descricao, valor);
             try (ServicoDaoInterface dao = new ServicoDaoClasse()) {
                 dao.inserir(s);
-                response.sendRedirect("cadastrarVeiculo.jsp?mensagem=cadastradocomsucesso");
+                response.sendRedirect("cadastrarServico.jsp?mensagem=cadastradocomsucesso");
             } catch (ErroDao e) {
                 //throw new RuntimeException(e);
-                response.sendRedirect("cadastrarVeiculo.jsp?mensagem=falhaaotentarcadastrar");
+                response.sendRedirect("cadastrarServico.jsp?mensagem=falhaaotentarcadastrar");
             }
         }
         else//erro falta parâmetros
         {
-            response.sendRedirect("cadastrarVeiculo.jsp?mensagem=faltaparametros");
+            response.sendRedirect("cadastrarServico.jsp?mensagem=faltaparametros");
         }
     }
 }

@@ -1,5 +1,6 @@
 <%@page pageEncoding="utf-8" %>
 <nav>
+    <link rel="stylesheet" href="Stylesheet/styleMenu.css">
 
     <a href="index.jsp">Home</a>
     <a href="cadastrarCliente.jsp">Cadastrar Cliente</a>

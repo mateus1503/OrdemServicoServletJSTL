@@ -12,7 +12,6 @@
         <h1>ID: ${veiculo.numeroSerie}</h1>
         <h1>Nome: ${veiculo.nome}</h1>
         <p>
-          <a href="listarOrdemServico?id=${veiculo.id}">Ordem de Serviços</a>
           <a href="editarVeiculo.jsp?numeroSerie=${veiculo.numeroSerie}&nome=${veiculo.nome}&modelo=${veiculo.modelo}&marca=${veiculo.marca}">Editar Dados</a>
           <a href="deletarVeiculo?numeroSerie=${veiculo.numeroSerie}">Deletar Veículo</a>
         </p>

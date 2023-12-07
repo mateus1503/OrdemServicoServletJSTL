@@ -15,7 +15,7 @@
         <h4>Telefone: ${cliente.telefone}</h4>
         <h4>Endereço: ${cliente.endereco}</h4>
         <p>
-          <a href="processarOrdemServico.jsp?id=${cliente.id}">Realizar Ordem de Serviço</a>
+          <a href="processarOrdemServico?id=${cliente.id}">Realizar Ordem de Serviço</a>
           <a href="listarVeiculo.jsp?id=${cliente.id}">Listar Veículos</a>
           <a href="listarOrdemServico?id=${cliente.id}">Ordem de Serviços</a>
           <a href="editarCliente.jsp?id=${cliente.id}&nome=${cliente.nome}&endereco=${cliente.endereco}&telefone=${cliente.telefone}&cpf=${cliente.cpf}">Editar Dados</a>

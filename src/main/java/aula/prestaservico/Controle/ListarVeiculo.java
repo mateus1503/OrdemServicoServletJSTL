@@ -1,8 +1,7 @@
 package aula.prestaservico.Controle;
 
-import aula.prestaservico.DAO.ErroDao;
-import aula.prestaservico.DAO.VeiculoDaoClasse;
-import aula.prestaservico.DAO.VeiculoDaoInterface;
+import aula.prestaservico.DAO.*;
+import aula.prestaservico.Modelo.Cliente;
 import aula.prestaservico.Modelo.Usuario;
 import aula.prestaservico.Modelo.Veiculo;
 import jakarta.servlet.ServletException;
@@ -24,13 +23,16 @@ public class ListarVeiculo extends HttpServlet {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
-            try(VeiculoDaoInterface dao=new VeiculoDaoClasse())
+            try(VeiculoDaoInterface dao=new VeiculoDaoClasse();
+                OrdemServicoDaoInterface ordemServicoDao = new OrdemServicoDaoClasse())
             {
                 String id=request.getParameter("id");
                 int clienteid = Integer.parseInt(id);
 
+                Cliente cliente = ordemServicoDao.buscarCliente(clienteid)
                 List<Veiculo> veiculos= dao.buscarVeiculos(clienteid);
                 request.setAttribute("veiculos",veiculos);
+                request.setAttribute("cliente",cliente);
                 request.getRequestDispatcher("/WEB-INF/listarVeiculo.jsp").forward(request,response);
             }catch (ErroDao e)
             {

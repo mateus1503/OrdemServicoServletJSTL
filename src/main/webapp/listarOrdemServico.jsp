@@ -18,7 +18,9 @@
       <th>Observação</th>
       <th>Data de Entrada</th>
       <th>Data de Saída</th>
-      <th>Total do Serviço</th>
+      <th>Total dos Serviços</th>
+      <th>Editar Ordem de Serviço</th>
+      <th>Deletar Ordem de Serviço</th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +37,8 @@
         <td>${ordemServico.dataEntrada}</td>
         <td>${ordemServico.dataSaida}</td>
         <td>${ordemServico.valorTotal}</td>
+        <td><a href="processarEditarOS?id=${ordemServico.id}&idCliente=${ordemServico.idCliente}">Editar</a></td>
+        <td><a href="deletarOrdemServico?id=${ordemServico.id}">Deletar</a></td>
       </tr>
     </c:forEach>
     </tbody>

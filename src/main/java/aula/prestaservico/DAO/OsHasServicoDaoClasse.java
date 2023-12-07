@@ -31,10 +31,27 @@ public class OsHasServicoDaoClasse implements OsHasServicoDaoInterface{
 
     @Override
     public void deletar(OsHasServico o) throws ErroDao {
+        try {
+            PreparedStatement stm = con.prepareStatement
+                    ("delete from ordemservico_has_servico where id_ordemservico = ?");
+            stm.setInt(1, o.getId_ordemservico());
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     @Override
     public void editar(OsHasServico o) throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement
+                    ("update ordemservico_has_servico set id_ordemservico=?, id_servico=?");
+            stm.setInt(1, o.getId_ordemservico());
+            stm.setInt(2, o.getId_servico());
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     @Override

@@ -41,13 +41,13 @@ public class EditarServico extends HttpServlet {
                 Servico s = new Servico(id,nome,descricao,valor);
                 try (ServicoDaoInterface dao = new ServicoDaoClasse()) {
                     dao.editar(s);
-                    response.sendRedirect("listarServico.jsp?mensagem=editadocomsucesso");
+                    response.sendRedirect("listarCliente.jsp?mensagem=editadocomsucesso");
                 } catch (ErroDao e) {
-                    response.sendRedirect("listarServico.jsp?mensagem=falhaaotentareditar");
+                    response.sendRedirect("listarCliente.jsp?mensagem=falhaaotentareditar");
                 }
             } else//erro falta parâmetros
             {
-                response.sendRedirect("listarServico.jsp?mensagem=faltaparametros");
+                response.sendRedirect("listarCliente.jsp?mensagem=faltaparametros");
             }
         } else {
             response.sendRedirect("index.jsp?mensagem=acessonegado");

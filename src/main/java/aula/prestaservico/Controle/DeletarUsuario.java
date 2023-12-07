@@ -36,11 +36,11 @@ public class DeletarUsuario extends HttpServlet {
                     dao.deletar(u);
                     response.sendRedirect("listarUsuario.jsp?mensagem=deletadocomsucesso");
                 } catch (ErroDao e) {
-                    response.sendRedirect("index.jsp?mensagem=falhaaotentareditar");
+                    response.sendRedirect("listarUsuario.jsp?mensagem=falhaaotentardeletar");
                 }
             } else//erro falta parâmetros
             {
-                response.sendRedirect("index.jsp?mensagem=faltaparametros");
+                response.sendRedirect("listarUsuario.jsp?mensagem=faltaparametros");
             }
         } else {
             response.sendRedirect("index.jsp?mensagem=acessonegado");

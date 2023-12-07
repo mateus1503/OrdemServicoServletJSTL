@@ -23,15 +23,17 @@ public class CadastrarVeiculo extends HttpServlet {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
+            String id = request.getParameter("id");
+            int idCliente = Integer.parseInt(id);
             String nome = request.getParameter("nome");
             String modelo = request.getParameter("modelo");
             String marca = request.getParameter("marca");
 
             if(Validador.temConteudo(nome)&&Validador.temConteudo(modelo)&&Validador.temConteudo(marca)) {
-                Veiculo v = new Veiculo(nome, modelo, marca);
+                Veiculo v = new Veiculo(nome, modelo, marca, idCliente);
                 try (VeiculoDaoInterface dao = new VeiculoDaoClasse()) {
                     dao.inserir(v);
-                    response.sendRedirect("cadastrarVeiculo.jsp?mensagem=cadastradocomsucesso");
+                    response.sendRedirect("listarCliente.jsp?mensagem=cadastradocomsucesso");
                 } catch (ErroDao e) {
                     response.sendRedirect("cadastrarVeiculo.jsp?mensagem=falhaaotentarcadastrar");
                 }

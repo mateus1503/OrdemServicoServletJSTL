@@ -8,6 +8,7 @@ public interface OsHasServicoDaoInterface extends AutoCloseable{
     public void inserir(OsHasServico o) throws ErroDao;
     public  void deletar(OsHasServico o) throws ErroDao;
     public void editar(OsHasServico o) throws ErroDao;
+    public List<OsHasServico> buscar(int id)throws ErroDao;
     @Override
     void close() throws ErroDao;
 }

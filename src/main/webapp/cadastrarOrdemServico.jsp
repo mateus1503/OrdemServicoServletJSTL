@@ -1,5 +1,6 @@
 <%@page pageEncoding="utf-8" %>
 <%@include file="WEB-INF/cabecalho.jsp"%>
+<%@include file="WEB-INF/menu.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <main>

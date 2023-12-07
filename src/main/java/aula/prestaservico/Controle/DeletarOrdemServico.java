@@ -1,12 +1,11 @@
 package aula.prestaservico.Controle;
 
-import aula.prestaservico.DAO.ErroDao;
-import aula.prestaservico.DAO.VeiculoDaoClasse;
-import aula.prestaservico.DAO.VeiculoDaoInterface;
+import aula.prestaservico.DAO.*;
+import aula.prestaservico.Modelo.OrdemServico;
+import aula.prestaservico.Modelo.OsHasServico;
+import aula.prestaservico.Modelo.Servico;
 import aula.prestaservico.Modelo.Usuario;
-import aula.prestaservico.Modelo.Veiculo;
 import aula.prestaservico.Util.Validador;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,8 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/deletarVeiculo")
-public class DeletarVeiculo extends HttpServlet {
+@WebServlet("/deletarOrdemServico")
+public class DeletarOrdemServico extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
@@ -27,13 +26,23 @@ public class DeletarVeiculo extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        if (usuario != null) {String veiculoNumSerie=request.getParameter("numeroSerie");
-            int numeroSerie = Integer.parseInt(veiculoNumSerie);
+        if (usuario != null) {
+            String id_ordemServico = request.getParameter("id");
+            int id = Integer.parseInt(id_ordemServico);
 
-            if(Validador.temConteudo(veiculoNumSerie)) {
-                Veiculo v = new Veiculo(numeroSerie);
-                try (VeiculoDaoInterface dao = new VeiculoDaoClasse()) {
-                    dao.deletar(v);
+
+            if(Validador.temConteudo(id_ordemServico)) {
+                try (OrdemServicoDaoInterface ordemServicoDao = new OrdemServicoDaoClasse();
+                     OsHasServicoDaoInterface osHasServicoDao = new OsHasServicoDaoClasse()) {
+
+                    OsHasServico osHasServico = new OsHasServico();
+
+                    osHasServico.setId_ordemservico(id);
+                    osHasServicoDao.deletar(osHasServico);
+
+                    OrdemServico ordemServico = new OrdemServico(id);
+                    ordemServicoDao.deletar(ordemServico);
+
                     response.sendRedirect("listarCliente.jsp?mensagem=deletadocomsucesso");
                 } catch (ErroDao e) {
                     response.sendRedirect("listarCliente.jsp?mensagem=falhaaotentardeletar");

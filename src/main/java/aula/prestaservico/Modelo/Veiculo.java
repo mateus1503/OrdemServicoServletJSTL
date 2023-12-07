@@ -5,22 +5,30 @@ import java.util.Objects;
 public class Veiculo {
     private int numeroSerie;
     private String nome, modelo, marca;
-    private Cliente cliente;
+    private int idCliente;
 
     public Veiculo() {}
     public Veiculo(int numeroSerie) {
         this.numeroSerie = numeroSerie;
     }
-    public Veiculo(String nome, String modelo, String marca) {
+    public Veiculo(int numeroSerie, String nome, String modelo, String marca) {
         this.nome = nome;
         this.modelo = modelo;
         this.marca = marca;
+        this.idCliente = idCliente;
     }
-    public Veiculo(int numeroSerie, String nome, String modelo, String marca) {
+    public Veiculo(String nome, String modelo, String marca, int idCliente) {
+        this.nome = nome;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.idCliente = idCliente;
+    }
+    public Veiculo(int numeroSerie, String nome, String modelo, String marca, int idCliente) {
         this.numeroSerie = numeroSerie;
         this.nome = nome;
         this.modelo = modelo;
         this.marca = marca;
+        this.idCliente = idCliente;
     }
 
     public int getNumeroSerie() {
@@ -55,11 +63,11 @@ public class Veiculo {
         this.marca = marca;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 }

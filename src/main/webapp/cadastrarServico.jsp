@@ -1,5 +1,6 @@
 <%@page pageEncoding="utf-8" %>
 <%@include file="WEB-INF/cabecalho.jsp"%>
+<%@include file="WEB-INF/menu.jsp"%>
 
 <main>
     <link rel="stylesheet" href="Stylesheet\styleCadastrar.css">

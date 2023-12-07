@@ -1,9 +1,15 @@
 package aula.prestaservico.Modelo;
 
 public class OsHasServico {
-    private int id_ordemservico, id_servico;
+    private int id, id_ordemservico, id_servico;
 
     public OsHasServico() {
+    }
+
+    public OsHasServico(int id, int id_ordemservico, int id_servico) {
+        this.id = id;
+        this.id_ordemservico = id_ordemservico;
+        this.id_servico = id_servico;
     }
 
     public OsHasServico(int id_ordemservico, int id_servico) {

@@ -36,8 +36,34 @@
         <c:when test="${param.mensagem eq 'telefonecadastradocomsucesso'}">
             <c:out value="Telefone cadastrado com sucesso" />
         </c:when>
+        <c:when test="${param.mensagem eq 'acessonegado'}">
+            <c:out value="Acesso negado! Faça login." />
+        </c:when>
+        <c:when test="${param.mensagem eq 'deletadocomsucesso'}">
+            <c:out value="Deletado com sucesso" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'comordemservico'}">
+            <c:out value="Impossível deletar. Pois tem Ordem Serviço cadastrada" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'falhaaotentardeletar'}">
+            <c:out value="Erro ao tentar deletar" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'editadocomsucesso'}">
+            <c:out value="Editado com sucesso" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'falhaaotentareditar'}">
+            <c:out value="Erro ao tentar editar" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'falhaaotentarlistar'}">
+            <c:out value="Erro ao tentar listar" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'logadocomsucesso'}">
+            <c:out value="Logado com sucesso" />
+        </c:when>
+        <c:when test="${param.mensagem eq 'erroaotentarlogar'}">
+            <c:out value="Erro ao tentar logar" />
+        </c:when>
     </c:choose>
 </div>
-<%@include file="menu.jsp"%>
 </body>
 </html>

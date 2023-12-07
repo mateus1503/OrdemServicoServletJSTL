@@ -2,6 +2,7 @@
 <%@ page import="aula.prestaservico.Modelo.Cliente" %>
 <%@page pageEncoding="utf-8" %>
 <%@include file="cabecalho.jsp"%>
+<%@include file="menu.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main>
   <link rel="stylesheet" href="Stylesheet\styleListarUsuario.css">

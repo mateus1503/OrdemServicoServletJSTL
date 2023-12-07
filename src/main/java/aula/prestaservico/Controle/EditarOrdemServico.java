@@ -6,7 +6,6 @@ import aula.prestaservico.Modelo.OsHasServico;
 import aula.prestaservico.Modelo.Servico;
 import aula.prestaservico.Modelo.Usuario;
 import aula.prestaservico.Util.Validador;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,18 +14,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Date;
+import java.io.PrintWriter;
 
-@WebServlet("/cadastrarOrdemServico")
-public class CadastrarOrdemServico extends HttpServlet {
+@WebServlet("/editarOrdemServico")
+public class EditarOrdemServico extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
+            String id_ordemServico = request.getParameter("id");
+            int id = Integer.parseInt(id_ordemServico);
             String id_cliente = request.getParameter("idCliente");
             int idCliente = Integer.parseInt(id_cliente);
             String nomeCliente = request.getParameter("nomeCliente");
@@ -39,17 +41,17 @@ public class CadastrarOrdemServico extends HttpServlet {
             String dataEntrada = request.getParameter("dataEntrada");
             String dataSaida = request.getParameter("dataSaida");
 
-            if(Validador.temConteudo(id_cliente)&&Validador.temConteudo(nomeCliente)&&Validador.temConteudo(cpfCliente)
+
+            if(Validador.temConteudo(id_ordemServico)&&Validador.temConteudo(id_cliente)&&Validador.temConteudo(nomeCliente)&&Validador.temConteudo(cpfCliente)
                     &&Validador.temConteudo(enderecoCliente)&&Validador.temConteudo(telefoneCliente)&&Validador.temConteudo(numeroserie_veiculo)
                     &&Validador.temConteudo(observacao)&&Validador.temConteudo(dataEntrada)&&Validador.temConteudo(dataSaida)) {
-
                 try (OrdemServicoDaoInterface ordemServicoDao = new OrdemServicoDaoClasse();
                      ServicoDaoInterface servicoDao = new ServicoDaoClasse();
                      OsHasServicoDaoInterface osHasServicoDao = new OsHasServicoDaoClasse()) {
 
-                    OrdemServico ordemServico = new OrdemServico(idCliente,nomeCliente,cpfCliente,enderecoCliente,
+                    OrdemServico ordemServico = new OrdemServico(id,idCliente,nomeCliente,cpfCliente,enderecoCliente,
                             telefoneCliente,numeroserieVeiculo,observacao,dataEntrada,dataSaida);
-                    ordemServicoDao.inserir(ordemServico);
+                    ordemServicoDao.editar(ordemServico);
 
                     String[] idsServicosSelecionados = request.getParameterValues("idServico");
                     if (idsServicosSelecionados != null) {
@@ -66,16 +68,15 @@ public class CadastrarOrdemServico extends HttpServlet {
 
                             osHasServico.setId_ordemservico(ordemServico.getId());
                             osHasServico.setId_servico(idServicoInserido);
-                            osHasServicoDao.inserir(osHasServico);
+                            osHasServicoDao.editar(osHasServico);
                         }
 
                         ordemServico.setValorTotal(totalValorServicos);
                         ordemServicoDao.atualizarValor(ordemServico);
                     }
-                    response.sendRedirect("listarCliente.jsp?mensagem=cadastradocomsucesso");
+                    response.sendRedirect("listarCliente.jsp?mensagem=editadocomsucesso");
                 } catch (ErroDao e) {
-                    //System.out.println(e);
-                    response.sendRedirect("listarCliente.jsp?mensagem=falhaaotentarcadastrar");
+                    response.sendRedirect("listarCliente.jsp?mensagem=falhaaotentareditar");
                 }
             } else//erro falta parâmetros
             {

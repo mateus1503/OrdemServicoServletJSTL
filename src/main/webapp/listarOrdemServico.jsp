@@ -2,6 +2,7 @@
 <%@ page import="aula.prestaservico.Modelo.Cliente" %>
 <%@page pageEncoding="utf-8" %>
 <%@include file="WEB-INF/cabecalho.jsp"%>
+<%@include file="WEB-INF/menu.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main>
   <link rel="stylesheet" href="Stylesheet\styleListarOS.css">
@@ -18,7 +19,9 @@
       <th>Observação</th>
       <th>Data de Entrada</th>
       <th>Data de Saída</th>
-      <th>Total do Serviço</th>
+      <th>Total dos Serviços</th>
+      <th>Editar Ordem de Serviço</th>
+      <th>Deletar Ordem de Serviço</th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +38,8 @@
         <td>${ordemServico.dataEntrada}</td>
         <td>${ordemServico.dataSaida}</td>
         <td>${ordemServico.valorTotal}</td>
+        <td><a href="processarEditarOS?id=${ordemServico.id}&idCliente=${ordemServico.idCliente}">Editar</a></td>
+        <td><a href="deletarOrdemServico?id=${ordemServico.id}">Deletar</a></td>
       </tr>
     </c:forEach>
     </tbody>

@@ -42,16 +42,38 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
 
     @Override
     public void deletar(OrdemServico o) throws ErroDao {
+        try {
+            PreparedStatement stm = con.prepareStatement
+                    ("delete from ordemservico where id = ?");
+            stm.setInt(1, o.getId());
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     @Override
     public void editar(OrdemServico o) throws ErroDao {
+        try {
+            PreparedStatement stm = con.prepareStatement
+                    ("update ordemservico set idCliente=?, numeroserieVeiculo=?, observacao=?, dataEntrada=?, dataSaida=? where id=?");
+            stm.setInt(1,o.getIdCliente());
+            stm.setInt(2,o.getNumeroserieVeiculo());
+            stm.setString(3,o.getObservacao());
+            stm.setString(4,o.getDataEntrada());
+            stm.setString(5,o.getDataSaida());
+            stm.setInt(6,o.getId());
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     public void atualizarValor(OrdemServico ordemServico) throws ErroDao {
         try {
             PreparedStatement stm=con.prepareStatement
-                ("update ordemServico set valorTotal = ? where id = ?");
+                ("update ordemservico set valorTotal = ? where id = ?");
 
             stm.setDouble(1,ordemServico.getValorTotal());
             stm.setInt(2,ordemServico.getId());
@@ -60,6 +82,29 @@ public class OrdemServicoDaoClasse implements OrdemServicoDaoInterface{
         } catch (SQLException e) {
             throw new ErroDao(e);
         }
+    }
+
+    @Override
+    public OrdemServico buscarOrdemServico(int id) throws ErroDao {
+        try {
+            PreparedStatement stm=con.prepareStatement("select * from ordemservico where id=?");
+            stm.setInt(1, id);
+            ResultSet rs=stm.executeQuery();
+            if (rs.next()){
+                OrdemServico ordemServico=new OrdemServico();
+                ordemServico.setId(rs.getInt("id"));
+                ordemServico.setIdCliente(rs.getInt("idCliente"));
+                ordemServico.setNumeroserieVeiculo(rs.getInt("numeroserieVeiculo"));
+                ordemServico.setObservacao(rs.getString("observacao"));
+                ordemServico.setDataEntrada(rs.getString("dataEntrada"));
+                ordemServico.setDataSaida(rs.getString("dataSaida"));
+                ordemServico.setValorTotal(rs.getDouble("valorTotal"));
+                return ordemServico;
+            }
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+        return null;
     }
 
     @Override

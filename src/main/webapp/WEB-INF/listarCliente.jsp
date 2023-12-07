@@ -2,6 +2,7 @@
 <%@ page import="aula.prestaservico.Modelo.Cliente" %>
 <%@page pageEncoding="utf-8" %>
 <%@include file="cabecalho.jsp"%>
+<%@include file="menu.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main>
   <link rel="stylesheet" href="Stylesheet\styleListarCliente.css">
@@ -15,7 +16,8 @@
         <h4>Telefone: ${cliente.telefone}</h4>
         <h4>Endereço: ${cliente.endereco}</h4>
         <p>
-          <a href="processarOrdemServico.jsp?id=${cliente.id}">Realizar Ordem de Serviço</a>
+          <a href="processarOrdemServico?id=${cliente.id}">Realizar Ordem de Serviço</a>
+          <a href="cadastrarVeiculo.jsp?id=${cliente.id}">Cadastrar Veículo</a>
           <a href="listarVeiculo.jsp?id=${cliente.id}">Listar Veículos</a>
           <a href="listarOrdemServico?id=${cliente.id}">Ordem de Serviços</a>
           <a href="editarCliente.jsp?id=${cliente.id}&nome=${cliente.nome}&endereco=${cliente.endereco}&telefone=${cliente.telefone}&cpf=${cliente.cpf}">Editar Dados</a>

@@ -16,6 +16,10 @@ public class OrdemServico {
 
     public OrdemServico() {}
 
+    public OrdemServico(int id) {
+        this.id = id;
+    }
+
     public OrdemServico(int idCliente, String nomeCliente, String cpfCliente, String enderecoCliente, String telefoneCliente
             , int numeroserieVeiculo, String observacao, String dataEntrada, String dataSaida) {
         this.idCliente = idCliente;
@@ -27,11 +31,10 @@ public class OrdemServico {
         this.observacao = observacao;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
-        this.valorTotal = valorTotal;
     }
 
     public OrdemServico(int id, int idCliente, String nomeCliente, String cpfCliente, String enderecoCliente, String telefoneCliente
-            , int numeroserieVeiculo, String observacao, List<Servico> servicos, String dataEntrada, String dataSaida, double valorTotal) {
+            , int numeroserieVeiculo, String observacao, String dataEntrada, String dataSaida) {
         this.id = id;
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
@@ -40,10 +43,8 @@ public class OrdemServico {
         this.telefoneCliente = telefoneCliente;
         this.numeroserieVeiculo = numeroserieVeiculo;
         this.observacao = observacao;
-        this.servicos = servicos;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
-        this.valorTotal = valorTotal;
     }
 
     public int getId() {

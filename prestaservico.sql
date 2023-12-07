@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `prestaservico` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `prestaservico`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Linux (x86_64)
 --
 -- Host: localhost    Database: prestaservico
 -- ------------------------------------------------------
--- Server version	8.0.35
+-- Server version	8.0.35-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `cliente` (
   `telefone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,8 +41,70 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Natanael','11122233344','425 Sul Alameda 2','3333-4444');
+INSERT INTO `cliente` VALUES (1,'Natanael','11122233344','425 Sul Alameda 2','3333-4444'),(2,'Jorge Neves','12345678923','159 Sul Alameda 5','1111-4444'),(4,'Jose','99988877765','123 Norte Alameda 5','4444-5555'),(5,'Maria','55555555599','123 Norte Alameda 2','5555-5555');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ordemservico`
+--
+
+DROP TABLE IF EXISTS `ordemservico`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ordemservico` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCliente` int NOT NULL,
+  `numeroserieVeiculo` int NOT NULL,
+  `observacao` varchar(500) DEFAULT NULL,
+  `dataEntrada` date NOT NULL,
+  `dataSaida` date NOT NULL,
+  `valorTotal` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_ordemservico_1_idx` (`idCliente`),
+  KEY `fk_ordemservico_2_idx` (`numeroserieVeiculo`),
+  CONSTRAINT `fk_ordemservico_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `fk_ordemservico_2` FOREIGN KEY (`numeroserieVeiculo`) REFERENCES `veiculo` (`numeroSerie`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ordemservico`
+--
+
+LOCK TABLES `ordemservico` WRITE;
+/*!40000 ALTER TABLE `ordemservico` DISABLE KEYS */;
+INSERT INTO `ordemservico` VALUES (4,2,3,'Buscar na loja','2023-12-07','2023-12-08',NULL),(5,1,1,'Buscar na loja','2023-12-07','2023-12-08',1184.99),(11,4,5,'teste','2023-12-07','2023-12-08',NULL),(12,4,5,'teste','2023-12-07','2023-12-08',705.00),(13,4,5,'teste1','2023-12-07','2023-12-09',929.99),(14,1,2,'Entregar em casa','2023-12-08','2023-12-12',1059.99);
+/*!40000 ALTER TABLE `ordemservico` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ordemservico_has_servico`
+--
+
+DROP TABLE IF EXISTS `ordemservico_has_servico`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ordemservico_has_servico` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_ordemservico` int NOT NULL,
+  `id_servico` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_os_has_servico_1_idx` (`id_ordemservico`),
+  KEY `fk_os_has_servico_2_idx` (`id_servico`),
+  CONSTRAINT `fk_os_has_servico_1` FOREIGN KEY (`id_ordemservico`) REFERENCES `ordemservico` (`id`),
+  CONSTRAINT `fk_os_has_servico_2` FOREIGN KEY (`id_servico`) REFERENCES `servico` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ordemservico_has_servico`
+--
+
+LOCK TABLES `ordemservico_has_servico` WRITE;
+/*!40000 ALTER TABLE `ordemservico_has_servico` DISABLE KEYS */;
+INSERT INTO `ordemservico_has_servico` VALUES (14,14,1),(15,14,6);
+/*!40000 ALTER TABLE `ordemservico_has_servico` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -58,7 +120,7 @@ CREATE TABLE `servico` (
   `descricao` varchar(45) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +129,7 @@ CREATE TABLE `servico` (
 
 LOCK TABLES `servico` WRITE;
 /*!40000 ALTER TABLE `servico` DISABLE KEYS */;
-INSERT INTO `servico` VALUES (1,'Troca de Para-brisa','Troca da borracha e para-brisa',929.99),(2,'Lanternagem','Reparo em arranhões e amassados',255.00);
+INSERT INTO `servico` VALUES (1,'Troca de Para-brisa','Troca da borracha e para-brisa',929.99),(2,'Lanternagem','Reparo em arranhões e amassados',255.00),(3,'Limpeza automotiva','Limpeza interna e externa',450.00),(5,'Pintura','Pintar o carro',500.00),(6,'Troca da lanterna','Troca lanterna traseira',130.00);
 /*!40000 ALTER TABLE `servico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +147,7 @@ CREATE TABLE `usuario` (
   `senha` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +156,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Mateus','mateus','123');
+INSERT INTO `usuario` VALUES (1,'Mateus','mateus','123'),(2,'Lui­s Felipe','luis','789'),(3,'Jose','jose','abc');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +176,7 @@ CREATE TABLE `veiculo` (
   PRIMARY KEY (`numeroSerie`),
   KEY `fk_veiculo_1_idx` (`id_cliente`),
   CONSTRAINT `fk_veiculo_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +185,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,'Clio','2006','Renault',1);
+INSERT INTO `veiculo` VALUES (1,'Clio','2006','Renault',1),(2,'Versa','2020','Nissan',1),(3,'Zafira','2006','Chevrolet',2),(5,'Uno','1994','Fiat',4),(6,'Versa','2020','Nissan',5);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +198,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-04  1:40:22
+-- Dump completed on 2023-12-07 10:56:31

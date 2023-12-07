@@ -20,10 +20,11 @@ public class VeiculoDaoClasse implements VeiculoDaoInterface{
     public void inserir(Veiculo v) throws ErroDao {
         try {
             PreparedStatement stm=con.prepareStatement
-                    ("insert into veiculo (nome,modelo,marca) values(?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+                    ("insert into veiculo (nome,modelo,marca,id_cliente) values(?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
             stm.setString(1,v.getNome());
             stm.setString(2,v.getModelo());
             stm.setString(3,v.getMarca());
+            stm.setInt(4,v.getIdCliente());
             stm.executeUpdate();
 
             ResultSet rs=stm.getGeneratedKeys();

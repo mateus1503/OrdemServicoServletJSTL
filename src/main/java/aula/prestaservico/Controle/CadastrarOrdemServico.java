@@ -39,6 +39,10 @@ public class CadastrarOrdemServico extends HttpServlet {
             String dataEntrada = request.getParameter("dataEntrada");
             String dataSaida = request.getParameter("dataSaida");
 
+            if (!Validador.temConteudo(observacao)) {
+                observacao = "Nenhuma";
+            }
+
             if(Validador.temConteudo(id_cliente)&&Validador.temConteudo(nomeCliente)&&Validador.temConteudo(cpfCliente)
                     &&Validador.temConteudo(enderecoCliente)&&Validador.temConteudo(telefoneCliente)&&Validador.temConteudo(numeroserie_veiculo)
                     &&Validador.temConteudo(observacao)&&Validador.temConteudo(dataEntrada)&&Validador.temConteudo(dataSaida)) {

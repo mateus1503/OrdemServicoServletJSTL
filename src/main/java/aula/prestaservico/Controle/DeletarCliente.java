@@ -1,10 +1,9 @@
 package aula.prestaservico.Controle;
 
-import aula.prestaservico.DAO.ClienteDaoClasse;
-import aula.prestaservico.DAO.ClienteDaoInterface;
-import aula.prestaservico.DAO.ErroDao;
+import aula.prestaservico.DAO.*;
 import aula.prestaservico.Modelo.Cliente;
 import aula.prestaservico.Modelo.Usuario;
+import aula.prestaservico.Modelo.Veiculo;
 import aula.prestaservico.Util.Validador;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -16,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/deletarCliente")
 public class DeletarCliente extends HttpServlet {
@@ -28,13 +28,21 @@ public class DeletarCliente extends HttpServlet {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
-            String usuarioId=request.getParameter("id");
-            int id = Integer.parseInt(usuarioId);
+            String clienteId=request.getParameter("id");
+            int id = Integer.parseInt(clienteId);
 
-            if(Validador.temConteudo(usuarioId)) {
+            if(Validador.temConteudo(clienteId)) {
                 Cliente c = new Cliente(id);
-                try (ClienteDaoInterface dao = new ClienteDaoClasse()) {
-                    dao.deletar(c);
+                try (ClienteDaoInterface daoCliente = new ClienteDaoClasse();
+                     VeiculoDaoInterface daoVeiculo = new VeiculoDaoClasse()) {
+
+                    List<Veiculo> veiculos= daoVeiculo.buscarVeiculos(id);
+
+                    for (Veiculo veiculo : veiculos) {
+                        daoVeiculo.deletar(veiculo);
+                    }
+
+                    daoCliente.deletar(c);
                     response.sendRedirect("listarCliente.jsp?mensagem=deletadocomsucesso");
                 } catch (ErroDao e) {
                     response.sendRedirect("listarCliente.jsp?mensagem=comordemservico");

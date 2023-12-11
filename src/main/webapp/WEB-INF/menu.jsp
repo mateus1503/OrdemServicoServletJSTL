@@ -2,7 +2,6 @@
 <nav>
     <link rel="stylesheet" href="Stylesheet/styleMenu.css">
 
-    <a href="index.jsp">Home</a>
     <a href="cadastrarCliente.jsp">Cadastrar Cliente</a>
     <a href="listarCliente.jsp">Lista de Clientes</a>
     <a href="cadastrarServico.jsp">Cadastrar Serviço</a>

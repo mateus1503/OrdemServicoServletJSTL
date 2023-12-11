@@ -28,13 +28,16 @@ public class ListarOrdemServico extends HttpServlet {
             {
                 String clienteId=request.getParameter("id");
                 int id = Integer.parseInt(clienteId);
+                int numeroserieVeiculo = 0;
 
                 Cliente cliente = ordemServicoDao.buscarCliente(id);
                 List<OrdemServico> ordemServicos= ordemServicoDao.buscar(id);
-                Veiculo veiculo = veiculoDao.buscarVeiculo(id);
+                for (OrdemServico ordemServico : ordemServicos) {
+                    numeroserieVeiculo = ordemServico.getNumeroserieVeiculo();
+                }
+                Veiculo veiculo = veiculoDao.buscarVeiculo(numeroserieVeiculo);
                 loadOrdemServico(request, ordemServicos, cliente, veiculo);
                 request.getRequestDispatcher("listarOrdemServico.jsp").forward(request,response);
-                System.out.println(veiculo);
             }catch (ErroDao e)
             {
                 response.sendRedirect("listarCliente.jsp?mensagem=erroaotentarlistar");

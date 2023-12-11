@@ -51,7 +51,7 @@ public class VeiculoDaoClasse implements VeiculoDaoInterface{
     @Override
     public Veiculo buscarVeiculo(int id) throws ErroDao {
         try {
-            PreparedStatement stm=con.prepareStatement("select * from veiculo where id_cliente=?");
+            PreparedStatement stm=con.prepareStatement("select * from veiculo where numeroSerie=?");
             stm.setInt(1, id);
             ResultSet rs=stm.executeQuery();
             if (rs.next()){
